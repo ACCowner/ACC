@@ -709,25 +709,38 @@ document.addEventListener("DOMContentLoaded", () => {
   
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const gameBtn = document.getElementById("open-game-btn");
-    const gameBox = document.getElementById("game-container");
+  const aiBtn = document.getElementById("open-ai-btn");
+  const gameBtn = document.getElementById("open-game-btn");
+  const aiBox = document.getElementById("ai-chat-container");
+  const gameBox = document.getElementById("game-container");
 
-    gameBtn.addEventListener("click", () => {
-        gameBox.classList.remove("hidden");
-        setTimeout(() => {
-            gameBox.classList.remove("opacity-0", "scale-95");
-        }, 10);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+  aiBtn.addEventListener("click", () => {
+    // Hide game if open
+    gameBox.classList.add("hidden");
 
-    // Optional: close on ESC key
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-            gameBox.classList.add("hidden");
-        }
-    });
+    // Show AI
+    aiBox.classList.remove("hidden", "opacity-0", "scale-95");
+    window.scrollTo({ top: aiBox.offsetTop - 50, behavior: "smooth" });
+  });
+
+  gameBtn.addEventListener("click", () => {
+    // Hide AI if open
+    aiBox.classList.add("hidden");
+
+    // Show game fullscreen
+    gameBox.classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // ESC closes game
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") {
+      gameBox.classList.add("hidden");
+    }
+  });
 });
 </script>
+
 
 
 <script>

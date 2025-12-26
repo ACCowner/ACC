@@ -147,41 +147,35 @@ closeBtn.addEventListener("click", () => {
         class="bg-gradient-to-r from-yellow-400 via-yellow-500 to-gold-500 text-black font-extrabold text-xl py-4 px-10 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
         Try an ACC AI Free
     </button>
-    <!-- TRY GAME BUTTON (already exists, shown here for context) -->
-<button id="open-game-btn"
-    class="bg-gradient-to-r from-yellow-400 via-yellow-500 to-gold-500
-           text-black font-extrabold text-xl py-4 px-10 rounded-full
-           shadow-lg transform transition-all duration-300
-           hover:scale-105 hover:shadow-2xl">
-    Try an ACC Game Free
-</button>
+    <button id="open-game-btn"
+        class="bg-gradient-to-r from-yellow-400 via-yellow-500 to-gold-500 text-black font-extrabold text-xl py-4 px-10 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+        Try an ACC Game Free
+    </button>
+</div>
 
-<!-- GAME CONTAINER (BOXED, NOT FULLSCREEN) -->
-<div id="game-container"
-     class="hidden opacity-0 transform scale-95 transition-all duration-500
-            mx-auto max-w-5xl mt-12">
 
-    <!-- Optional Header -->
-    <div class="flex justify-between items-center mb-2">
-        <h3 class="text-xl font-bold text-gold-500">
-            ACC Game Preview
-        </h3>
 
-        <!-- Close button -->
-        <button id="close-game-btn"
-                class="text-gold-500 hover:text-gold-300 text-sm font-bold">
-            ✕ Close
-        </button>
-    </div>
 
-    <!-- Game Frame -->
-    <iframe
-        src="https://tejandrewsacc-cyber-pong-quadradash.static.hf.space"
-        class="w-full h-[450px] border border-gold-500 rounded-xl
-               bg-black shadow-xl"
-        loading="lazy"
-        scrolling="no">
-    </iframe>
+
+
+
+<!-- Hidden Chat Container -->
+<div id="ai-chat-container" class="hidden opacity-0 transform scale-95 transition-all duration-500 mx-auto max-w-5xl">
+  <iframe src="https://tejandrewsacc-cyber-pong-quadradash.static.hf.space"
+          class="w-full h-[450px] border-0 mb-2" scrolling="no" style="overflow:hidden;"></iframe>
+</div>
+
+<!-- Game Container -->  
+<div id="game-container" class="hidden fixed inset-0 z-50">  
+    <iframe   
+        src="https://tejandrewsacc-cyber-pong-quadradash.static.hf.space"   
+        allowfullscreen   
+        loading="lazy"  
+        class="w-full h-full border-0"  
+        style="flex:1;">  
+    </iframe>  
+
+  
 </div>
 
         <!-- Content Sections -->
@@ -716,36 +710,24 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const gameBtn = document.getElementById("open-game-btn");
-    const closeGameBtn = document.getElementById("close-game-btn");
     const gameBox = document.getElementById("game-container");
-    const aiBox = document.getElementById("ai-chat-container");
 
     gameBtn.addEventListener("click", () => {
-        // Ensure AI is hidden
-        if (aiBox) aiBox.classList.add("hidden");
-
-        // Show game
         gameBox.classList.remove("hidden");
         setTimeout(() => {
             gameBox.classList.remove("opacity-0", "scale-95");
         }, 10);
-
-        // Scroll to game
-        window.scrollTo({
-            top: gameBox.offsetTop - 50,
-            behavior: "smooth"
-        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    closeGameBtn.addEventListener("click", () => {
-        gameBox.classList.add("opacity-0", "scale-95");
-        setTimeout(() => {
+    // Optional: close on ESC key
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
             gameBox.classList.add("hidden");
-        }, 300);
+        }
     });
 });
 </script>
-
 
 
 <script>
